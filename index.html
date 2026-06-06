@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Happy Birthday gayu 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <audio id="bgMusic" loop autoplay>
+        <source src="Happy-Birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <canvas id="introCanvas"></canvas>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div id="fireworkContainer"></div>
+
+    <div class="site-container" id="appContainer">
+        <!-- BESTFRIEND QUESTION PAGE -->
+        <div id="bestfriendPage" class="page active-page">
+            <div class="glassy-card bf-card">
+                <div class="valentine-question" style="font-size:1.4rem;">💖 Will you be my forever bestfriend? 💖</div>
+                <img src="sticker3.gif" class="sticker" style="width:150px; margin:12px auto;" alt="bestfriend sticker">
+                <div class="valentine-buttons" id="bfButtons">
+                    <button class="valentine-btn yes-btn" id="bfYesBtn">Yes 💕</button>
+                    <button class="valentine-btn no-btn" id="bfNoBtn">No</button>
+                </div>
+                <div id="bfYesMessage" style="display:none; text-align:center; padding:16px;">
+                    <div style="font-size:2.2rem; margin-bottom:10px;">🎉💕🎉</div>
+                    <p style="font-size:1.1rem; color:#ff6680;">Yay!! Forever it is bestie! 💖</p>
+                </div>
+            </div>
+            <div class="heart-burst-container" id="bfHeartBurst"></div>
+        </div>
+
+        <!-- GIFT PAGE -->
+        <div id="giftPage" class="page">
+            <div class="glassy-card gift-card">
+                <div class="gift-scene" id="giftBox">
+                    <div class="cube" id="cube3d">
+                        <div class="cube-face front"></div>
+                        <div class="cube-face back"></div>
+                        <div class="cube-face left"></div>
+                        <div class="cube-face right"></div>
+                        <div class="cube-face top"></div>
+                        <div class="cube-face bottom"></div>
+                    </div>
+                    <div id="teddyGiftPop" class="teddy-pop">💞</div>
+                </div>
+                <h2 style="color:#ff4466; margin-top:18px;">✨ open your gift ✨</h2>
+                <div class="open-gift-message" id="giftHint">tap the box</div>
+            </div>
+        </div>
+
+        <!-- BIRTHDAY FIREWORKS -->
+        <div id="birthdayPage" class="page">
+            <div class="glassy-card">
+                <div class="fireworks-text">happy birthday gayu</div>
+                <img src="sticker2.gif" class="sticker" style="width:180px; margin:10px auto;">
+                <p style="font-size:1.1rem; background:rgba(120,0,20,0.25); color:#ffb3bc; padding:14px; border-radius:50px; border:1px solid rgba(180,0,30,0.3);">✨ my best friend, and my everything. Happy birthday. Every day with you is the best day of my life, the person who makes my world brighter just by being in it. I love you more than words can say ✨</p>
+            </div>
+        </div>
+
+        <!-- JOURNEY PAGE -->
+        <div id="journeyPage" class="page">
+            <div class="glassy-card">
+                <div class="story-title">🌹some of our sweet memory🌹</div>
+                <div class="journey-carousel">
+                    <div class="carousel-frames">
+                        
+                        <div class="memory-frame" data-media-type="video" data-media-src="video1.mp4" data-caption="our memory">
+                            <div class="frame-media">🎥</div>
+                            <div class="frame-caption">our memory</div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div id="expandedMediaContainer"></div>
+        </div>
+
+        <!-- FIRST DATE PAGE -->
+        <div id="firstDatePage" class="page">
+            <div class="glassy-card">
+                <div class="story-title">A special video for you</div>
+                
+                <!-- Video Confirmation Dialog -->
+                <div id="videoConfirmDialog" class="video-confirm-dialog">
+                    <img src="sticker5.gif" class="sticker" style="width:140px; margin:16px auto;" alt="special sticker">
+                    <p style="font-size:1.2rem; margin-bottom:16px; color:#ffb3bc;">💕 wanna see our special video? 💕</p>
+                    <div class="confirm-buttons">
+                        <button class="confirm-btn yes-video-btn" onclick="playFirstDateVideo()">Yes 🌹</button>
+                        <button class="confirm-btn no-video-btn" onclick="hideVideoConfirm()">No 💔</button>
+                    </div>
+                </div>
+                
+                <!-- Video Player (initially hidden) -->
+                <div id="firstDateVideoContainer" style="display: none;">
+                    <video controls preload="metadata" playsinline webkit-playsinline style="max-width: 90%; border-radius: 20px; margin: 20px auto; display: block;" id="firstDateVideo">
+                        <source src="video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p style="font-size:1.1rem; margin:24px; background:rgba(120,0,20,0.2); color:#ffb3bc; padding:16px; border-radius:50px;"></p>
+                </div>
+                
+                <!-- Message when No is clicked -->
+                <div id="noVideoMessage" style="display: none; text-align: center; padding: 40px;">
+                    <p style="font-size:1.2rem; color:#ff4466;">💝 maybe next time habibti 💝</p>
+                    <p style="font-size:1rem; margin-top:14px; color:#ffb3bc;">the memory lives in our hearts 💕</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- POETRY PAGE - ONLY ENVELOPE + POETRY -->
+        <div id="letterPage" class="page">
+            <div class="glassy-card">
+                <div class="story-title">💌 a letter for you 💌</div>
+                
+                <div class="envelope-wrapper" id="envelopeClick">
+                    <div class="envelope-visual" id="envelopeFlap">
+                        <span class="envelope-icon">💌</span>
+                    </div>
+                    <div class="letter-scroll" id="scrollLetter">
+                        <div class="poetry-content">
+                            For my best friend —<br><br>
+                            You came into my life like sunlight through a quiet window,<br>
+                            soft at first, then suddenly everywhere.<br><br>
+                            You know the version of me that the world never sees —<br><br>
+                            With you, silence is never awkward,<br>
+                            laughter never forced,<br>
+                            and even ordinary days become stories worth remembering.<br><br>
+                            You are the person I can lose time talking to.<br><br>
+                            Friendship is a strange kind of love —<br>
+                            not loud, not demanding,<br>
+                            but steady like the moon that never forgets to return.<br><br>
+                            And if life pulls us into different cities,<br>
+                            different lives, different skies,<br>
+                            I know this:<br><br>
+                            some people are temporary chapters,<br>
+                            but you —<br>
+                            you are the home written between every page.<br><br>
+                            <span class="heart-final">💕</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FRIENDSHIP GAME PAGE -->
+        <div id="friendshipGamePage" class="page">
+            <div class="glassy-card" style="width:92%; padding:24px 18px;">
+                <h2 style="color:#ff4d6d; margin-bottom:16px; font-size:1.4rem;">🎮 Friendship Levels Game</h2>
+                <div id="fg-question" style="font-size:1.05rem; color:#ffb3bc; min-height:70px; margin-bottom:16px; line-height:1.6;"></div>
+                <button id="fg-opt1" class="btn" style="width:100%; margin:8px 0; padding:12px; font-size:1rem;"></button>
+                <button id="fg-opt2" class="btn" style="width:100%; margin:8px 0; padding:12px; font-size:1rem;"></button>
+                <div id="fg-result" style="min-height:50px; margin-top:14px; font-size:1rem; color:#ff6680; font-weight:700;"></div>
+                <div style="margin-top:14px; height:14px; background:rgba(255,255,255,0.07); border-radius:20px; overflow:hidden; width:100%;">
+                    <div id="fg-progress" style="height:100%; width:0%; background:linear-gradient(90deg,#8b0000,#ff1a3a); border-radius:20px; transition:0.5s;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POLAROID ROPE PAGE -->
+        <div id="polaroidPage" class="page">
+            <div class="glassy-card" style="padding:14px 18px 10px; flex-shrink:0; width:92%; margin-bottom:8px;">
+                <h2 style="font-size:1.3rem; color:#ff6680;">🌹 our memories 🌹</h2>
+            </div>
+            <div class="pol-gallery">
+                <div class="pol-rope"></div>
+                <div class="pol-container">
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image1.jpg" alt="star gazing"><div class="pol-caption">star gazing 🌟</div></div>
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image2.jpg" alt="late night walks"><div class="pol-caption">late night walks 🌙</div></div>
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image3.jpg" alt="cooking together"><div class="pol-caption">cooking together 🍳</div></div>
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image4.jpg" alt="picnic date"><div class="pol-caption">picnic date 🧺</div></div>
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image5.jpg" alt="road trip"><div class="pol-caption">road trip 🚗</div></div>
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image6.jpg" alt="dancing in rain"><div class="pol-caption">dancing in rain 🌧️</div></div>
+                    <div class="pol-item"><div class="pol-string"></div><div class="pol-clip"></div><img src="image7.jpg" alt="watch sunrise"><div class="pol-caption">watch sunrise 🌅</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THANKYOU PAGE -->
+        <div id="thankyouPage" class="page">
+            <div class="glassy-card">
+                <div class="thankyou-late">💖 late but heartfelt 💖<br>thank you for being with me</div>
+                <img src="sticker4.gif" alt="Thank You" class="thankyou-image">
+            </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn">◀ prev</button>
+            <button class="nav-btn" id="nextBtn">next ▶</button>
+        </div>
+    </div>
+
+    <div id="centerNoteContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
