@@ -956,7 +956,7 @@ body::before {
 .pol-item img {
     height: 100%;
     width: 100%;
-    aspect-ratio: 9 / 6;
+    aspect-ratio: 9 / 16;
     object-fit: cover;
     display: block;
     border-radius: 1px;
